@@ -109,20 +109,19 @@ public void deleteAtInd(int index)
        sl.insertAtBeg(7); //3000
        sl.insertAtBeg(8); //4000
        sl.insertAtEnd(9); //5000 
-       sl.display();//8->7->6->5->null
-       System.out.println();
-       sl.findMid();
-       System.out.println();
        sl.display();//8->7->6->5->9->null
+       System.out.println();
+       sl.findMid();//6
+     
        System.out.println();
        
        sl.insertAtInd(10,5);
-       sl.display();
+       sl.display();//8->7->6->5->10->9->null
        
        System.out.println();
        
        sl.deleteAtInd(5);
-       sl.display();
+       sl.display();//8->7->6->5->9->null
        
        
        }
