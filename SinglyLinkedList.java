@@ -10,14 +10,12 @@ class SinglyLinkedList{
     }   
     //head 
     private Node head=null;
-
 //insertAtBeg()
 public void insertAtBeg(int data){//5
     Node newNode=new Node(data);
     newNode.next=head;
     head=newNode;
 }
-
  //insertAtEnd()
 public void  insertAtEnd(int data){
     Node newNode=new Node(data);
@@ -26,7 +24,7 @@ public void  insertAtEnd(int data){
         temp=temp.next;//4000->3k->2k->1k
     temp.next=newNode;
 }
-//deleteAtEnd
+
 public void deleteAtEnd()
 {
     Node temp=head;
@@ -37,7 +35,6 @@ public void deleteAtEnd()
     temp.next=null;
 }
 
-//findMid
 public void findMid()
 {
     Node fast=head;
@@ -51,16 +48,25 @@ public void findMid()
     
     System.out.println(slow.data);
 }
+    public void reverse(){
+        Node prev=null;
+        Node curr = head;
+        Node temp;
+        while(curr !=null){
+            
+            temp=curr.next;
+            curr.next = prev;
+            prev=curr;
+            curr=temp;
+        }
+        head=prev;
+    }
 
-
-//deleteAtBeg
 public void deleteAtBeg()
 {
     head=head.next;
 }
 
-
-//insertAtInd
 public void insertAtInd(int data,int index)
 {
     Node newNode=new Node(data);
@@ -75,7 +81,6 @@ public void insertAtInd(int data,int index)
     
 }
 
-//deleteAtInd
 public void deleteAtInd(int index)
 {
     Node temp=head;
@@ -89,6 +94,45 @@ public void deleteAtInd(int index)
     
 }
 
+public void deleteAtKthNode(int k)
+{
+   int len = 0;
+    Node temp=head;
+    while (temp != null)
+    {
+    len++;
+    temp = temp.next;
+    }
+
+    for (int i = len / k; i >= 1; i--)
+    {
+        deleteAtInd(i * k); 
+    }
+
+}
+  //reversebygroup
+    public static Node group(Node head, int k){
+        Node curr = head;
+        Node next = null;
+        Node prev = null;
+        int count=0;
+        while(curr!=null && count<k){
+        next = curr.next;
+        curr.next=prev;
+        prev=curr;
+        curr=next;
+        count++;
+    }
+    if(next!=null){
+        head.next=group(next,k);
+        
+    }
+    return prev;
+    }
+     public void ReverseGroups(int n){
+        head=group(head,n);
+    }
+
 
 //display
     public void display(){
@@ -99,8 +143,10 @@ public void deleteAtInd(int index)
         }System.out.print("null");
     }
 }
+
+
     
-//Mainclass    
+    
  public class Main{   
     public static void main(String[] args){
         SinglyLinkedList sl=new SinglyLinkedList();
@@ -108,21 +154,10 @@ public void deleteAtInd(int index)
        sl.insertAtBeg(6); //2000
        sl.insertAtBeg(7); //3000
        sl.insertAtBeg(8); //4000
-       sl.insertAtEnd(9); //5000 
-       sl.display();//8->7->6->5->9->null
-       System.out.println();
-       sl.findMid();//6
-     
-       System.out.println();
-       
-       sl.insertAtInd(10,5);
-       sl.display();//8->7->6->5->10->9->null
-       
-       System.out.println();
-       
-       sl.deleteAtInd(5);
-       sl.display();//8->7->6->5->9->null
-       
+       sl.insertAtEnd(9); //5000   //8->7->6->5->9->null
+
+     sl. ReverseGroups(3);
+       sl.display();//8->6->9->null
        
        }
 }
